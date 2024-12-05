@@ -6,34 +6,35 @@
 import React from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
+import Calculadora from './components/Calculadora'
 
 function App() {
   return (
     <PaperProvider>
-      <View>
-        
+      <View style={styles.container}>
+
+      </View>
+      <View style={styles.input}>
+        <Calculadora />
+      </View>
+      <View style={styles.button}>
+
       </View>
     </PaperProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  input: {
+    flex:1,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  button: {
+    flex:1,
+  }
+
 });
 
 export default App;
