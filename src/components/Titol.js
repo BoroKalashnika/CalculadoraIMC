@@ -6,10 +6,14 @@ function Titol() {
     return (
         <View style={styles.container}>
             <View style={styles.titleMain}>
-                <Text>Calculadora</Text>
-                <View style={styles.title}><Text>IMC</Text></View>
+                <Text style={{ fontSize: 35, }}>Calculadora</Text>
+                <View style={styles.title}>
+                    <Text style={{ fontSize: 35, fontWeight: 'bold', color: 'green' }}>I</Text>
+                    <Text style={{ fontSize: 35, fontWeight: 'bold', color: 'blue' }}>M</Text>
+                    <Text style={{ fontSize: 35, fontWeight: 'bold', color: 'red' }}>G</Text>
+                </View>
             </View>
-            
+
         </View>
     );
 }
@@ -18,15 +22,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     titleMain: {
         flex: 1,
     },
     title: {
         flex: 1,
-        alignItems: 'center'
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
 });
 
