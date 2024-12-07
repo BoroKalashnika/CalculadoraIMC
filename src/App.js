@@ -9,12 +9,12 @@ import { StyleSheet, View } from 'react-native';
 import Calculadora from './components/Calculadora'
 
 function App() {
-  const [pes, setPes] = useState('');
-  const [alcada, setAlcada] = useState('');
+  const [imc, setImc] = useState('');
+  const [txtImc, setTxtImc] = useState('');
 
-  const actualizarValores = (newPes, newAlcada) => {
-    setPes(newPes);
-    setAlcada(newAlcada);
+  const actualizarValores = (newImc, newTxtImc) => {
+    setImc(newImc);
+    setTxtImc(newTxtImc);
   };
 
   return (
@@ -23,7 +23,8 @@ function App() {
 
       </View>
       <View style={styles.input}>
-        <Calculadora onValoresCambiados={actualizarValores} />
+        <Calculadora onCalcIMC={actualizarValores} />
+        {console.log(imc + txtImc)}
       </View>
       <View style={styles.button}>
 
