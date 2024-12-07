@@ -4,7 +4,6 @@
  */
 
 import React, { useState } from 'react';
-import React, { useState } from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import Resultat from './components/Resultat'
@@ -14,26 +13,25 @@ import Titol from './components/Titol'
 function App() {
   const [imc, setImc] = useState('');
   const [txtImc, setTxtImc] = useState('');
+  const [show, setShow] = useState('');
 
-  const actualizarValores = (newImc, newTxtImc) => {
+  const actualizarValores = (newImc, newTxtImc, newShow) => {
     setImc(newImc);
     setTxtImc(newTxtImc);
+    setShow(newShow);
   };
 
   return (
     <PaperProvider>
-      <View style={styles.input}>
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.title}>
           <Titol />
-          <View style={styles.input}>
-            <Calculadora onCalcIMC={actualizarValores} />
-            {console.log(imc + txtImc)}
-          </View>
-          <View style={styles.button}>
-          </View>
+        </View>
+        <View style={styles.input}>
+          <Calculadora onCalcIMC={actualizarValores} />
         </View>
         <View style={styles.button}>
-          <Resultat valImc={imc} valTxtImc={txtImc} />
+          {show && (<Resultat valImc={imc} valTxtImc={txtImc} />)}
         </View>
       </View>
     </PaperProvider>
@@ -42,6 +40,9 @@ function App() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  title: {
     flex: 1,
   },
   input: {

@@ -1,6 +1,6 @@
 
 function CalcularIMC(pes, alcada) {
-    return pes / Math.pow(alcada, 2);
+    return parseFloat(pes / Math.pow(alcada, 2)).toFixed(2);
 }
 
 function CalcularIMCtxt(pes, alcada) {

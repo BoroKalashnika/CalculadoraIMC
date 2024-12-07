@@ -23,8 +23,10 @@ function Calculadora({ onCalcIMC }) {
     });
 
     useEffect(() => {
-        if (!hasErrorsKg() && !hasErrorsM() && alcada && pes) {
-            onCalcIMC(CalcularIMC(pes, alcada), CalcularIMCtxt(pes, alcada));
+        if (alcada && pes && !hasErrorsKg() && !hasErrorsM()) {
+            onCalcIMC(CalcularIMC(pes, alcada), CalcularIMCtxt(pes, alcada), true);
+        } else {
+            onCalcIMC(null, null, false);
         }
     }, [pes, alcada]);
 
