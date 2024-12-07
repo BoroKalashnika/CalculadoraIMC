@@ -3,12 +3,14 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import Resultat from './components/Resultat'
 
 function App() {
+  const [imc, setImc] = useState('');
+  const [txtImc, setTxtImc] = useState('');
 
   return (
     <PaperProvider>
@@ -19,7 +21,7 @@ function App() {
 
       </View>
       <View style={styles.button}>
-        <Resultat />
+        <Resultat valImc={imc} valTxtImc={txtImc} />
       </View>
     </PaperProvider>
   );
