@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { TextInput, HelperText } from 'react-native-paper';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { CalcularIMC, CalcularIMCtxt } from '../functions/CalcularIMC';
 
 const windowDimensions = Dimensions.get('window');
 
-function Calculadora({ onCalcIMC }) {
+function Calculadora({ setVals }) {
     const [pes, setPes] = useState("");
     const [alcada, setAlcada] = useState("");
     const [dimensions, setDimensions] = useState({ window: windowDimensions });
@@ -22,20 +21,22 @@ function Calculadora({ onCalcIMC }) {
         return () => subscription?.remove();
     });
 
-    useEffect(() => {
-        if (alcada && pes && !hasErrorsKg() && !hasErrorsM()) {
-            onCalcIMC(CalcularIMC(pes, alcada), CalcularIMCtxt(pes, alcada), true);
-        } else {
-            onCalcIMC(null, null, false);
-        }
-    }, [pes, alcada]);
-
     const onChangeKg = (nuevoPes) => {
         setPes(nuevoPes);
+        if (nuevoPes && pesValid.test(nuevoPes)) {
+            setVals(nuevoPes, alcada);
+        } else {
+            setVals(null, alcada);
+        }
     };
 
     const onChangeM = (nuevaAlcada) => {
         setAlcada(nuevaAlcada);
+        if (nuevaAlcada && pesValid.test(nuevaAlcada)) {
+            setVals(pes, nuevaAlcada);
+        } else {
+            setVals(pes, null);
+        }
     };
 
     const pesValid = /^(\d+)$|^(\d*\.\d+)$/;

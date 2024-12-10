@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import Resultat from './components/Resultat';
@@ -6,14 +6,27 @@ import Calculadora from './components/Calculadora';
 import Titol from './components/Titol';
 
 function App() {
-  const [imc, setImc] = useState('');
-  const [txtImc, setTxtImc] = useState('');
+  const [pes, setPes] = useState('');
+  const [alcada, setAlcada] = useState('');
   const [show, setShow] = useState('');
 
-  const actualizarValores = (newImc, newTxtImc, newShow) => {
-    setImc(newImc);
-    setTxtImc(newTxtImc);
-    setShow(newShow);
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+      setShow(false);
+    });
+    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+      setShow(true);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
+  const actualizarValores = (newPes, newAlcada) => {
+    setPes(newPes);
+    setAlcada(newAlcada);
   };
 
   return (
@@ -25,10 +38,10 @@ function App() {
               <Titol />
             </View>
             <View style={styles.input}>
-              <Calculadora onCalcIMC={actualizarValores} />
+              <Calculadora setVals={actualizarValores} />
             </View>
             <View style={styles.button}>
-              {show && <Resultat valImc={imc} valTxtImc={txtImc} />}
+              {show && pes && alcada && <Resultat weight={pes} height={alcada} />}
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>
